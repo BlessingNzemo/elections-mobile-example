@@ -2,107 +2,187 @@ import 'package:elections/pages/periodes/periodePage.dart';
 import 'package:elections/user/ui/pages/login/loginCtrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:animate_do/animate_do.dart';
 
 
-class LoginPage extends ConsumerWidget{
-  var login=TextEditingController();
-  var password=TextEditingController();
+
+
+class LoginPage extends ConsumerWidget {
+  var login = TextEditingController();
+  var password = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state=ref.watch(loginCtrlProvider);
+
+    var state = ref.watch(loginCtrlProvider);
+    
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40),
-        child: Column(
-          children: [
-            if(state) CircularProgressIndicator(),
-            _logo(),
-            SizedBox(height: 50),
-            _titreText(),
-            SizedBox(height: 20),
-            _usernameField(),
-            SizedBox(height: 10),
-            _passwordField(),
-            SizedBox(height: 30),
-            _validerBtn(context, ref)
-          ],
-        )
-      )
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 400,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/background.png'),
+                          fit: BoxFit.fill
+                      )
+                  ),
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        left: 30,
+                        width: 80,
+                        height: 200,
+                        child: FadeInUp(duration: Duration(seconds: 1), child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/images/light-1.png')
+                              )
+                          ),
+                        )),
+                      ),
+                      Positioned(
+                        left: 140,
+                        width: 80,
+                        height: 150,
+                        child: FadeInUp(duration: Duration(milliseconds: 1200), child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/images/light-2.png')
+                              )
+                          ),
+                        )),
+                      ),
+                      Positioned(
+                        right: 40,
+                        top: 40,
+                        width: 80,
+                        height: 150,
+                        child: FadeInUp(duration: Duration(milliseconds: 1300), child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/images/clock.png')
+                              )
+                          ),
+                        )),
+                      ),
 
 
-    );
-  }
 
-  Widget _logo(){
-    return   Container(
-      padding: const EdgeInsets.only(top:50),
-      child: Image.network("https://t3.ftcdn.net/jpg/06/14/84/58/"
-          "360_F_614845842_pNcPaSxVwBiO6hGaaSXKrQOCs6xqnijX.jpg",
-        width: 250,
-      ),
-    );
-  }
+                      Positioned(
+                        child: FadeInUp(duration: Duration(milliseconds: 1600), child: Container(
+                          margin: EdgeInsets.only(top: 50),
+                          child: Center(
+                            child: Text("Se connecter", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+                          ),
+                        )),
+                      )
 
-  Widget _titreText(){
-    return Text("Authentification",
-      style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),);
-  }
 
-  Widget _usernameField(){
-    return TextField(
-      controller: login,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: "Nom d'utilisateur",
-        prefixIcon: Icon(Icons.verified_user)
-      )
-    );
-  }
-
-  Widget _passwordField(){
-    return TextField(
-        controller: password,
-        obscureText: true,
-        decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: "Mot de passe",
-            prefixIcon: Icon(Icons.password),
-            suffixIcon: Icon(Icons.visibility_off)
-        )
-    );
-  }
-
-  Widget _validerBtn(BuildContext context, WidgetRef ref){
-    return   Container(
-        width: double.infinity,
-        height: 50,
-        margin: EdgeInsets.symmetric(horizontal: 0),
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 0),
-              backgroundColor: Colors.deepOrange,
-              foregroundColor: Colors.white
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(30.0),
+                  child: Column(
+                    children: <Widget>[
+                      FadeInUp(duration: Duration(milliseconds: 1800), child: Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Color.fromRGBO(143, 148, 251, 1)),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color.fromRGBO(143, 148, 251, .2),
+                                  blurRadius: 20.0,
+                                  offset: Offset(0, 10)
+                              )
+                            ]
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color:  Color.fromRGBO(143, 148, 251, 1)))
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Email ou numéro de téléphone",
+                                    hintStyle: TextStyle(color: Colors.grey[700])
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Mot de passe",
+                                    hintStyle: TextStyle(color: Colors.grey[700])
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )),
+                      SizedBox(height: 30,),
+                      FadeInUp(duration: Duration(milliseconds: 1900), child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(143, 148, 251, 1),
+                                  Color.fromRGBO(143, 148, 251, .6),
+                                ]
+                            )
+                        ),
+                        child: Center(
+                          child: GestureDetector(
+                                  onTap: () async {
+                                    print("login ${login.text}");
+                                    print("password ${password.text}");
+                                    var ctrl =
+                                        ref.read(loginCtrlProvider.notifier);
+                                    Map<String, String> data = {
+                                      "username": login.text,
+                                      "mot_de_passe": password.text
+                                    };
+                                    var res =
+                                        await ctrl.soumettreFormulaire(data);
+                                    if (res) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (ctx) => PeriodePage()));
+                                    }
+                                  },
+                                  child: Text(
+                                    "Login",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                        ),
+                      )),
+                      SizedBox(height: 70,),
+                      FadeInUp(duration: Duration(milliseconds: 2000), child: Text("Mot de passe oublié?", style: TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),)),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-          onPressed: () async{
-            print("login ${login.text}");
-            print("password ${password.text}");
-            var ctrl=ref.read(loginCtrlProvider.notifier);
-            Map<String, String> data={
-              "username": login.text,
-              "mot_de_passe": password.text
-            };
-            var res=await ctrl.soumettreFormulaire(data);
-            if(res){
-              Navigator.push(context,
-                  MaterialPageRoute(builder:(ctx)=> PeriodePage() ));
-            }
-
-          },
-          icon: Icon(Icons.check),
-          label: const Text('Demarrer', style:TextStyle(fontSize: 20)),
         )
     );
   }
-
 }
